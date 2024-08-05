@@ -1,10 +1,12 @@
 const pino =  require('pino');
-
 const discordHandler =  require('./discordHandler.js');
 const state =  require('./state.js');
 const utils =  require('./utils.js');
 const storage = require('./storage.js');
 const whatsappHandler =  require('./whatsappHandler.js');
+const express = require('express');
+const app = express();
+
 const port = process.env.PORT || 4000;
 
 (async () => {
@@ -58,6 +60,15 @@ const port = process.env.PORT || 4000;
 
   await whatsappHandler.start();
   state.logger.info('WhatsApp client started.');
+
+  app.get('/', (req, res) => {
+    res.send('Bot is running');
+  });
+
+  app.listen(port, () => {
+    console.log(`App listening on port ${port}`);
+    state.logger.info(`App listening on port ${port}`);
+  });
 
   console.log('Bot is now running. Press CTRL-C to exit.');
 })();

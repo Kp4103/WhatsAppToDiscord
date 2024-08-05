@@ -5,6 +5,7 @@ const state =  require('./state.js');
 const utils =  require('./utils.js');
 const storage = require('./storage.js');
 const whatsappHandler =  require('./whatsappHandler.js');
+const port = process.env.PORT || 4000;
 
 (async () => {
   const version = 'v0.10.26';
